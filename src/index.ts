@@ -36,8 +36,10 @@ mongoose.connect(process.env.DB as string, {
   useUnifiedTopology: true,
   serverSelectionTimeoutMS: 5000,
   useFindAndModify: false,
-}, () => {
-  console.log("Connected to DB");
+}, (err) => {
+  console.log(err);
+  
+  console.log(`Connected to DB ${process.env.DB}`);
 });
 
  /**

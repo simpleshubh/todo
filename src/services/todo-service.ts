@@ -29,6 +29,7 @@ export async function getTodos(): Promise<iTodo[]> {
     const todos: iTodo[] = await mTodo.find()
     return todos;
   } catch (error) {
+    console.log(error);
     throw { httpStatus: httpStatusCode.SERVICE_UNAVAILABLE, message: message.INTERNAL_ERROR};
   }
 }
