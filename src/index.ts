@@ -1,19 +1,11 @@
-/**
- * Required External Modules
- */
+import * as dotenv from "dotenv";
+import express from "express";
+import cors from "cors";
+import helmet from "helmet";
+import { routes } from './routes/index';
+import mongoose from "mongoose";
 
- import * as dotenv from "dotenv";
- import express from "express";
- import cors from "cors";
- import helmet from "helmet";
- import { routes } from './routes/index';
- import mongoose from "mongoose";
- 
- dotenv.config();
-
- /**
- * App Variables
- */
+dotenv.config();
 
 if (!process.env.PORT) {
   process.exit(1);
@@ -22,10 +14,6 @@ if (!process.env.PORT) {
 const PORT: number = parseInt(process.env.PORT as string, 10);
 
 const app = express();
-
-/**
- *  App Configuration
- */
 
 app.use(helmet());
 app.use(cors());
@@ -37,15 +25,8 @@ mongoose.connect(process.env.DB as string, {
   serverSelectionTimeoutMS: 5000,
   useFindAndModify: false,
 }, (err) => {
-  console.log(err);
-  
-  console.log(`Connected to DB ${process.env.DB}`);
+  throw err;
 });
-
- /**
- * Server Activation
- */
-
 
 app.use('/v1/', routes);
 

@@ -9,8 +9,6 @@ export async function createTodo(req: Request, res: Response): Promise<any> {
     const allTodos = await todoService.createTodo(req.body);
     res.status(httpStatusCode.CREATED).json({ message: message.TODO_ADDED, todos: allTodos });
   } catch(err) {
-    console.log(err);
-    
     res.status(err.httpStatus).json(err.message);
   }
 }
